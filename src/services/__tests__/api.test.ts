@@ -2,9 +2,9 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import axios from 'axios';
 import { movieApi, getImageUrl } from '../api';
 
+// Mock axios module
 vi.mock('axios');
-
-const mockedAxios = vi.mocked(axios);
+const mockedAxios = vi.mocked(axios, true);
 
 describe('API Service', () => {
   beforeEach(() => {
@@ -33,9 +33,9 @@ describe('API Service', () => {
         },
       };
 
-      mockedAxios.create.mockReturnValue({
+      mockedAxios.create = vi.fn().mockReturnValue({
         get: vi.fn().mockResolvedValue(mockResponse),
-      } as any);
+      });
 
       const result = await movieApi.getTrending();
 
@@ -45,9 +45,9 @@ describe('API Service', () => {
     });
 
     it('should handle API errors', async () => {
-      mockedAxios.create.mockReturnValue({
+      mockedAxios.create = vi.fn().mockReturnValue({
         get: vi.fn().mockRejectedValue(new Error('API Error')),
-      } as any);
+      });
 
       await expect(movieApi.getTrending()).rejects.toThrow('API Error');
     });
@@ -75,9 +75,9 @@ describe('API Service', () => {
         },
       };
 
-      mockedAxios.create.mockReturnValue({
+      mockedAxios.create = vi.fn().mockReturnValue({
         get: vi.fn().mockResolvedValue(mockResponse),
-      } as any);
+      });
 
       const result = await movieApi.getPopular(2);
 
@@ -110,9 +110,9 @@ describe('API Service', () => {
         },
       };
 
-      mockedAxios.create.mockReturnValue({
+      mockedAxios.create = vi.fn().mockReturnValue({
         get: vi.fn().mockResolvedValue(mockResponse),
-      } as any);
+      });
 
       const result = await movieApi.getMovieDetails(123);
 
@@ -145,9 +145,9 @@ describe('API Service', () => {
         },
       };
 
-      mockedAxios.create.mockReturnValue({
+      mockedAxios.create = vi.fn().mockReturnValue({
         get: vi.fn().mockResolvedValue(mockResponse),
-      } as any);
+      });
 
       const result = await movieApi.searchMovies('Search Query');
 

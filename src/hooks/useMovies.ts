@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { movieApi, ApiResponse, Movie, MovieDetails } from '../services/api';
+import { movieApi, Movie, MovieDetails } from '../services/api';
 
 export const useTrendingMovies = (timeWindow: 'day' | 'week' = 'week') => {
   const [movies, setMovies] = useState<Movie[]>([]);

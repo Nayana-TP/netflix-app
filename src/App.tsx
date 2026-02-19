@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import FeaturedCarousel from './components/FeaturedCarousel';
 import MovieRow from './components/MovieRow';
 import AuthLanding from './components/AuthLanding';
-import TestConnection from './components/TestConnection';
 import { useTrendingMovies, usePopularMovies, useTopRatedMovies, useNowPlayingMovies } from './hooks/useMovies';
 import { Movie } from './services/api';
 import { tokenStorage, User } from './services/authService';
