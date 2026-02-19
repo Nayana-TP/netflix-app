@@ -1,5 +1,5 @@
 node_modules
-.env
+.env.example
 *.env
 .env.local
 .env.development.local
@@ -11,3 +11,6 @@ build
 .DS_Store
 .vscode/
 .idea/
+
+# Temporarily allow .env for development
+!.env

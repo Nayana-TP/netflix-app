@@ -30,9 +30,15 @@ export const authService = {
     password: string;
   }): Promise<RegisterResponse> => {
     try {
+      console.log('Making registration request to:', `${API_BASE_URL}/register`);
+      console.log('Registration data:', userData);
       const response = await axios.post(`${API_BASE_URL}/register`, userData);
+      console.log('Registration response:', response.data);
       return response.data;
     } catch (error: any) {
+      console.error('Registration error details:', error);
+      console.error('Error response:', error.response?.data);
+      console.error('Error status:', error.response?.status);
       throw new Error(error.response?.data?.message || 'Registration failed');
     }
   },
