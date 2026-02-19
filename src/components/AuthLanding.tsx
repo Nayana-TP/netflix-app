@@ -54,11 +54,16 @@ const AuthLanding: React.FC<AuthLandingProps> = ({ onLoginSuccess }) => {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('Registration form submitted!');
     setLoading(true);
     setError('');
 
+    // Log form data before validation
+    console.log('Form data before validation:', registerData);
+
     // Validate passwords match
     if (registerData.password !== registerData.confirmPassword) {
+      console.log('Password validation failed');
       setError('Passwords do not match');
       setLoading(false);
       return;
@@ -66,10 +71,21 @@ const AuthLanding: React.FC<AuthLandingProps> = ({ onLoginSuccess }) => {
 
     // Validate password length
     if (registerData.password.length < 6) {
+      console.log('Password length validation failed');
       setError('Password must be at least 6 characters long');
       setLoading(false);
       return;
     }
+
+    // Check if all required fields are filled
+    if (!registerData.user_name || !registerData.email || !registerData.password) {
+      console.log('Required fields validation failed');
+      setError('Please fill in all required fields');
+      setLoading(false);
+      return;
+    }
+
+    console.log('All validations passed, proceeding with registration...');
 
     try {
       const { confirmPassword, ...userData } = registerData;
